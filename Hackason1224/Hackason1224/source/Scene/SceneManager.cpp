@@ -14,6 +14,7 @@
 #include "../../gauge.h"
 #include "../player.h"
 #include "../yajirushi.h"
+#include "../Game/BackGround.h"
 
 //=============================================================================
 // コンストラクタ
@@ -44,11 +45,11 @@ SceneManager::~SceneManager()
 void SceneManager::Init()
 {
 	// リソース読み込み
-	ResourceManager::Instance()->LoadTexture("TitleLogo", "data/Texture/Title.png");
-	ResourceManager::Instance()->LoadTexture("ResultLogo", "data/Texture/Result.png");
+	LoadResource();
 
 	titleLogo = new TitleLogo();
 	resultLogo = new ResultLogo();
+	backGround = new BackGround();
 
 	InitGauge(0);
 	//プレイヤーの初期化
@@ -65,6 +66,7 @@ void SceneManager::Uninit()
 {
 	SAFE_DELETE(titleLogo);
 	SAFE_DELETE(resultLogo);
+	SAFE_DELETE(backGround);
 
 	UninitGauge();
 	//プレイヤーの終了処理
@@ -96,4 +98,11 @@ void SceneManager::ChangeState(State next)
 	{
 		fsm[currentState]->OnStart(*this);
 	}
+}
+
+void SceneManager::LoadResource()
+{
+	ResourceManager::Instance()->LoadTexture("TitleLogo", "data/Texture/Title.png");
+	ResourceManager::Instance()->LoadTexture("ResultLogo", "data/Texture/Result.png");
+	ResourceManager::Instance()->LoadTexture("BackGround", "data/Texture/BackGround.png");
 }

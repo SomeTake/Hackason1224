@@ -10,8 +10,12 @@
 #include <vector>
 #include "../../Main.h"
 
+//****************************************************
+// インスタンス作成用クラスの前方宣言
+//****************************************************
 class TitleLogo;
 class ResultLogo;
+class BackGround;
 //****************************************************
 // クラス定義
 //****************************************************
@@ -38,6 +42,9 @@ public:
 	// 状態遷移処理
 	void ChangeState(State next);
 
+	// リソースの読み込み
+	void LoadResource();
+
 private:
 	// 内部クラスの前方宣言
 	class SceneTitle;
@@ -51,5 +58,6 @@ private:
 	// 各種インスタンス
 	TitleLogo* titleLogo;
 	ResultLogo* resultLogo;
+	BackGround* backGround;
 };
 #endif
