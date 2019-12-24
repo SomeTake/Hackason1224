@@ -18,6 +18,7 @@
 #include "../Game/BackGround.h"
 #include "../Game/Flag.h"
 #include "../CircleSceneChanger.h"
+#include "../GameConfig.h"
 
 //=============================================================================
 // コンストラクタ
@@ -131,4 +132,12 @@ void SceneManager::LoadResource()
 	ResourceManager::Instance()->LoadTexture("Changer", "data/Texture/Load.png");
 	CircleSceneChanger::Instance()->LoadMaskTexture();
 	CircleSceneChanger::Instance()->LoadChangeTexture();
+}
+
+// ゴールと現在の駅がある場所を測る
+void SceneManager::CheckDistance()
+{
+	D3DXVECTOR3 vec = GameConfig::Const::StartPosition - GameConfig::Const::GoalPosition; // 実際には落下した位置と比較する
+	ResultDistance = D3DXVec3Length(&vec);
+	ResultDistance = abs(ResultDistance);
 }

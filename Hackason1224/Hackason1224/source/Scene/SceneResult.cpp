@@ -11,6 +11,8 @@
 
 void SceneManager::SceneResult::OnStart(SceneManager & entity)
 {
+	// 距離の計算
+	entity.CheckDistance();
 
 	//*********************************************************
 	// シーンチェンジの終了

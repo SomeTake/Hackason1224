@@ -46,6 +46,9 @@ public:
 	// リソースの読み込み
 	void LoadResource();
 
+	// 距離の計算
+	void CheckDistance();
+
 private:
 	// 内部クラスの前方宣言
 	class SceneTitle;
@@ -61,5 +64,8 @@ private:
 	ResultLogo* resultLogo;
 	BackGround* backGround;
 	Flag* flag;
+
+	// 結果の距離
+	float ResultDistance;
 };
 #endif
