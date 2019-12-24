@@ -75,17 +75,17 @@ void UninitPlayer(void)
 //=============================================================================
 void UpdatePlayer(void)
 {
+	player.key = 0;
+
 	if (GetKeyboardPress(DIK_DOWN) || GetKeyboardPress(DIK_S))
 	{
 		player.key = 2;
 		player.cnt = 0;
-
 	}
 	else if (GetKeyboardPress(DIK_UP) || GetKeyboardPress(DIK_W))
 	{
 		player.key = 1;
 		player.cnt = 0;
-
 	}
 
 	//アニメーション

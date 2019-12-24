@@ -6,7 +6,10 @@
 //=============================================================================
 #include "../main.h"
 #include "station.h"
-
+#include "yajirushi.h"
+#include "input.h"
+#include "../gauge.h"
+#include "GameConfig.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -25,6 +28,10 @@ static LPDIRECT3DTEXTURE9		g_pD3DTextureStation = NULL;		// テクスチャへのポリゴ
 
 static STATION					station;			// バレット構造体
 
+bool enter = false;
+bool use = false;
+float gravity = 0.0f;
+D3DXVECTOR3 old;
 //=============================================================================
 // 初期化処理
 //=============================================================================
@@ -44,7 +51,7 @@ HRESULT InitStation(int type)
 	// バレットの初期化処理
 	station.pos = D3DXVECTOR3(300.0f, 900.0f, 0.0f);		// 座標データを初期化
 	station.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		// 回転データを初期化
-	station.move= D3DXVECTOR3(10.0f, 0.0f, 0.0f);	// 移動量を初期化
+	station.move= D3DXVECTOR3(1800.0f, 0.0f, 0.0f);	// 移動量を初期化
 	station.Texture = g_pD3DTextureStation;
 
 	D3DXVECTOR2 temp = D3DXVECTOR2(STATION_TEXTURE_SIZE_X, STATION_TEXTURE_SIZE_Y);
@@ -74,27 +81,57 @@ void UninitStation(void)
 //=============================================================================
 void UpdateStation(void)
 {
-	float distance;
-	float destination;
-	int cnt=0;
-	bool use=true;
-	//ゲージ*移動量=目的地
-	destination =1.0f*station.move.x*150;
-	//if (cnt % 120 == 0)
-	//{
-		// 駅の移動処理
-		if (station.pos.x >= destination)
-		{
-			use = false;
-		}
-		if (use==true)
-		{
+	YAJIRUSHI *yajirushi = GetYajirushi();
 
-			station.pos += station.move;
-			cnt = 0;
-		}
+	old.x = station.pos.x;
+
+	if (GetKeyboardTrigger(DIK_RETURN))
+	{
+		enter = true;
+		use = true;
+	}
+	static D3DXVECTOR3 destination = D3DXVECTOR3(0.0f,0.0f,0.0f);
+	static float distance;
+	static int cnt=1;
+
+	if (enter == true)
+	{
+		//ゲージ*移動量=目的地
+		distance = GetPower()*station.move.x;
+
+		destination.x = distance * cosf(yajirushi->rot.z) / 30.0f;
+		destination.y = distance * sinf(yajirushi->rot.z) / 30.0f;
+
+		enter = false;
+	}
+
+
+	//if (station.pos.y <= STATION_TEXTURE_SIZE_Y / 2)
+	//{// 着地した
+	//	station.pos.y = station.STATION_TEXTURE_SIZE_Y / 2;      //地面の位置に移動
+	//	station.move.y = station.move.y * -0.75f;//マイナスにマイナスをかけて上にいかせる
 	//}
-	//cnt++;
+
+
+	if (cnt % 120 == 0)
+	{
+		use = false;
+	}
+	if (use==true)
+	{
+		gravity +=1.5f;
+		station.pos.y += gravity;
+		station.pos +=  destination;
+
+		cnt++;
+	}
+	if (station.pos.y > GameConfig::Const::GoalPosition.y)
+	{
+		station.pos.y = GameConfig::Const::GoalPosition.y;
+		station.pos.x = old.x;
+	}
+
+	
 			
 	SetVertexStation();				// 移動後の座標で頂点を設定
 		

@@ -101,12 +101,15 @@ void UpdateYajirushi(void)
 			yajirushi.rot.z = 0.0f;
 		}
 
-		if (yajirushi.rot.z <= -1.5f)
+		//if (yajirushi.rot.z <= -1.5f)
+		//{
+		//	yajirushi.rot.z = -1.5f;
+		//}
+
+		if (yajirushi.rot.z <= -D3DX_PI/2)
 		{
-			yajirushi.rot.z = -1.5f;
+			yajirushi.rot.z = -D3DX_PI/2;
 		}
-
-
 
 		yajirushi.pos = player->pos;
 		yajirushi.pos.x += PLAYER_TEXTURE_SIZE_X;
@@ -114,7 +117,7 @@ void UpdateYajirushi(void)
 	}
 
 	// 画面外まで進んだ？
-	if (yajirushi.pos.y < -YAJIRUSHI_TEXTURE_SIZE_Y)	// 自分の大きさを考慮して画面外か判定している
+	if (player->anim == true)	// 自分の大きさを考慮して画面外か判定している
 	{
 		yajirushi.use = false;
 	}

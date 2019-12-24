@@ -136,6 +136,7 @@
     <ClCompile Include="source\Resource\ResourceManager.cpp" />
     <ClCompile Include="source\Result\ResultLogo.cpp" />
     <ClCompile Include="source\player.cpp" />
+    <ClCompile Include="source\Result\Score.cpp" />
     <ClCompile Include="source\SceneChanger.cpp" />
     <ClCompile Include="source\Scene\SceneGame.cpp" />
     <ClCompile Include="source\Scene\SceneManager.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="source\Resource\ResourceManager.h" />
     <ClInclude Include="source\Result\ResultLogo.h" />
     <ClInclude Include="source\player.h" />
+    <ClInclude Include="source\Result\Score.h" />
     <ClInclude Include="source\SceneChanger.h" />
     <ClInclude Include="source\Scene\BaseState.h" />
     <ClInclude Include="source\Scene\SceneGame.h" />

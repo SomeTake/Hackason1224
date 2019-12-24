@@ -20,6 +20,7 @@
     <ClCompile Include="source\GameConfig.cpp" />
     <ClCompile Include="source\SceneChanger.cpp" />
     <ClCompile Include="source\CircleSceneChanger.cpp" />
+    <ClCompile Include="source\Result\Score.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -43,5 +44,6 @@
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\SceneChanger.h" />
     <ClInclude Include="source\CircleSceneChanger.h" />
+    <ClInclude Include="source\Result\Score.h" />
   </ItemGroup>
 </Project>
