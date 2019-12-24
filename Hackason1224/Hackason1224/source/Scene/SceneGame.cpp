@@ -5,6 +5,7 @@
 #include "../station.h"
 #include "../yajirushi.h"
 #include "../Game/BackGround.h"
+#include "../Game/Flag.h"
 
 void SceneManager::SceneGame::OnStart(SceneManager & entity)
 {
@@ -28,6 +29,8 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 	//‰w‚ÌXVˆ—
 	UpdateStation();
 
+	// ƒS[ƒ‹ƒtƒ‰ƒbƒO
+	entity.flag->Update();
 
 	// ”wŒi
 	entity.backGround->Update();
@@ -52,4 +55,6 @@ void SceneManager::SceneGame::OnDraw(SceneManager & entity)
 	DrawStation();
 
 
+	// ƒS[ƒ‹ƒtƒ‰ƒbƒO
+	entity.flag->Draw();
 }

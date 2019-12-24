@@ -16,6 +16,8 @@
     <ClCompile Include="source\player.cpp" />
     <ClCompile Include="source\Game\BackGround.cpp" />
     <ClCompile Include="source\station.cpp" />
+    <ClCompile Include="source\Game\Flag.cpp" />
+    <ClCompile Include="source\GameConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -35,5 +37,7 @@
     <ClInclude Include="source\yajirushi.h" />
     <ClInclude Include="source\Game\BackGround.h" />
     <ClInclude Include="source\station.h" />
+    <ClInclude Include="source\Game\Flag.h" />
+    <ClInclude Include="source\GameConfig.h" />
   </ItemGroup>
 </Project>
