@@ -6,6 +6,7 @@
     <ClCompile Include="source\Scene\SceneTitle.cpp" />
     <ClCompile Include="source\Scene\SceneGame.cpp" />
     <ClCompile Include="source\Scene\SceneResult.cpp" />
+    <ClCompile Include="source\input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -14,5 +15,6 @@
     <ClInclude Include="source\Scene\SceneTitle.h" />
     <ClInclude Include="source\Scene\SceneGame.h" />
     <ClInclude Include="source\Scene\SceneResult.h" />
+    <ClInclude Include="source\input.h" />
   </ItemGroup>
 </Project>
