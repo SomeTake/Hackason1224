@@ -117,7 +117,7 @@ void UpdateYajirushi(void)
 	}
 
 	// 画面外まで進んだ？
-	if (yajirushi.pos.y < -YAJIRUSHI_TEXTURE_SIZE_Y)	// 自分の大きさを考慮して画面外か判定している
+	if (player->anim == true)	// 自分の大きさを考慮して画面外か判定している
 	{
 		yajirushi.use = false;
 	}

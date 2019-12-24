@@ -15,7 +15,7 @@
 #define GAUGE_TEXTURE_SIZE_Y	(100)									// 同上
 
 #define GAUGE_POS_X		(30)
-#define GAUGE_POS_Y		(900)
+#define GAUGE_POS_Y		(30)
 
 #define GAUGE_TEXTURE_PATTERN_DIVIDE_X	(1)								// アニメパターンのテクスチャ内分割数（X)
 #define GAUGE_TEXTURE_PATTERN_DIVIDE_Y	(1)								// アニメパターンのテクスチャ内分割数（Y)
@@ -36,7 +36,7 @@
 #define WAKU_TEXTURE_SIZE_Y	(100)										// 同上
 		
 #define WAKU_POS_X		(30)
-#define WAKU_POS_Y		(900)
+#define WAKU_POS_Y		(30)
 
 
 typedef struct	// 構造体

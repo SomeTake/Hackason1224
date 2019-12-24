@@ -9,6 +9,7 @@
 #include "yajirushi.h"
 #include "input.h"
 #include "../gauge.h"
+#include "GameConfig.h"
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -29,7 +30,8 @@ static STATION					station;			// バレット構造体
 
 bool enter = false;
 bool use = false;
-bool gravity = false;
+float gravity = 0.0f;
+D3DXVECTOR3 old;
 //=============================================================================
 // 初期化処理
 //=============================================================================
@@ -81,25 +83,21 @@ void UpdateStation(void)
 {
 	YAJIRUSHI *yajirushi = GetYajirushi();
 
+	old.x = station.pos.x;
 
 	if (GetKeyboardTrigger(DIK_RETURN))
 	{
 		enter = true;
 		use = true;
-		gravity = true;
 	}
 	static D3DXVECTOR3 destination = D3DXVECTOR3(0.0f,0.0f,0.0f);
 	static float distance;
 	static int cnt=1;
 
-	if (gravity == true)
-	{
-		station.pos.y += 10.0f;
-	}
 	if (enter == true)
 	{
 		//ゲージ*移動量=目的地
-		distance = 1.0f*station.move.x;
+		distance = GetPower()*station.move.x;
 
 		destination.x = distance * cosf(yajirushi->rot.z) / 30.0f;
 		destination.y = distance * sinf(yajirushi->rot.z) / 30.0f;
@@ -115,16 +113,22 @@ void UpdateStation(void)
 	//}
 
 
-	if (cnt % 30 == 0)
+	if (cnt % 120 == 0)
 	{
 		use = false;
 	}
 	if (use==true)
 	{
-
+		gravity +=1.5f;
+		station.pos.y += gravity;
 		station.pos +=  destination;
 
 		cnt++;
+	}
+	if (station.pos.y > GameConfig::Const::GoalPosition.y)
+	{
+		station.pos.y = GameConfig::Const::GoalPosition.y;
+		station.pos.x = old.x;
 	}
 
 	
