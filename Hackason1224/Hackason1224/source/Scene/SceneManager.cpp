@@ -50,7 +50,7 @@ void SceneManager::Init()
 	titleLogo = new TitleLogo();
 	resultLogo = new ResultLogo();
 
-	InitGauge(1);
+	InitGauge(0);
 	//ƒvƒŒƒCƒ„[‚Ì‰Šú‰»
 	InitPlayer(0);
 
