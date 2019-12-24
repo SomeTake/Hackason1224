@@ -1,6 +1,7 @@
 //=============================================================================
 //
-// 処理 [HP.cpp]
+// 処理 [gauge.cpp]
+// Author : Takeaki Sakamaki
 //
 //=============================================================================
 #include "../../main.h"
@@ -15,17 +16,26 @@
 //*****************************************************************************
 // プロトタイプ宣言
 //*****************************************************************************
+/*　メーター　*/
 HRESULT MakeVertexGauge(int no);
 void SetTextureGauge(int no, int cntPattern);
 void SetVertexGauge(int no);
 
+/*　枠　*/
+HRESULT MakeVertexWaku(void);
+
 //*****************************************************************************
 // グローバル変数
 //*****************************************************************************
+/*　メーター　*/
 static LPDIRECT3DTEXTURE9		g_pD3DTextureGauge = NULL;		// テクスチャへのポリゴン
-static GAUGE					g_GaugeWk[GAUGE_MAX];				// 構造体
+static GAUGE					g_GaugeWk[GAUGE_MAX];			// 構造体
 
-static float g_Gauge;
+/*　枠　*/
+static LPDIRECT3DTEXTURE9		g_pD3DTextureWaku = NULL;		// テクスチャへのポインタ
+static VERTEX_2D				g_vertexWkWaku[NUM_VERTEX];		// 頂点情報格納ワーク
+
+static float g_Gauge;			// 
 static float g_Power;			// 0.0～1.0の値
 //=============================================================================
 // 初期化処理
@@ -41,25 +51,35 @@ HRESULT InitGauge(int type)
 		D3DXCreateTextureFromFile(pDevice,		// デバイスのポインタ
 			TEXTURE_GAUGE,						// ファイルの名前
 			&g_pD3DTextureGauge);				// 読み込むメモリのポインタ
+
+		D3DXCreateTextureFromFile(pDevice,		// デバイスへのポインタ
+			TEXTURE_WAKU,						// ファイルの名前
+			&g_pD3DTextureWaku);				// 読み込むメモリー
+
 	}
 
 
 	for (int i = 0; i < GAUGE_MAX; i++)
 	{
-		g_GaugeWk[i].use = true;										// 使用
+		g_GaugeWk[i].use = true;											// 使用
 		g_GaugeWk[i].pos = D3DXVECTOR3(GAUGE_POS_X , GAUGE_POS_Y, 0.0f);	// 座標データを初期化
-		g_GaugeWk[i].PatternAnim = 0;									// アニメパターン番号をランダムで初期化
-		g_GaugeWk[i].CountAnim = 0;									// アニメカウントを初期化
+		g_GaugeWk[i].PatternAnim = 0;										// アニメパターン番号をランダムで初期化
+		g_GaugeWk[i].CountAnim = 0;											// アニメカウントを初期化
 		g_GaugeWk[i].Texture = g_pD3DTextureGauge;
 
 		g_GaugeWk[i].count = 0;
 		g_GaugeWk[i].Isfinished = false;
-
+		g_GaugeWk[i].reverse = false;
 
 		g_Gauge = 0.0f;
 
-		MakeVertexGauge(i);											// 頂点情報の作成
+		MakeVertexGauge(i);													// 頂点情報の作成
 	}
+
+
+	// 頂点情報の作成
+	MakeVertexWaku();
+
 	return S_OK;
 
 }
@@ -69,11 +89,20 @@ HRESULT InitGauge(int type)
 //=============================================================================
 void UninitGauge(void)
 {
+	/*　メーター　*/
 	if (g_pD3DTextureGauge != NULL)
 	{	// テクスチャの開放
 		g_pD3DTextureGauge->Release();
 		g_pD3DTextureGauge = NULL;
 	}
+
+	/*　枠　*/
+	if (g_pD3DTextureWaku != NULL)
+	{	// テクスチャの開放
+		g_pD3DTextureWaku->Release();
+		g_pD3DTextureWaku = NULL;
+	}
+
 }
 
 //=============================================================================
@@ -99,18 +128,27 @@ void UpdateGauge(void)
 			if (g_GaugeWk[i].Isfinished == false)
 			{
 				g_GaugeWk[i].count++;
-				if (g_GaugeWk[i].count == LOOP_COUNT)
+				if (g_GaugeWk[i].count == LOOP_COUNT + 1)
 				{
 					g_GaugeWk[i].count = 0;
 				}
-
-				if (g_GaugeWk[i].count < 30)
+				
+				if (g_GaugeWk[i].reverse == false)
 				{
-					g_Gauge += 100 / 30;
+					g_Gauge += 100.0f / 30.0f;
+					if (g_Gauge >= 100.0f)
+					{
+						g_GaugeWk[i].reverse = true;
+					}
 				}
 				else
 				{
-					g_Gauge -= 100 / 30;
+					g_Gauge -= 100.0f / 30.0f;
+					if (g_Gauge <= 0.0f)
+					{
+						g_GaugeWk[i].reverse = false;
+					}
+
 				}
 			}
 
@@ -133,6 +171,7 @@ void DrawGauge(void)
 {
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
+	/*　メーター　*/
 	// 頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_2D);
 
@@ -147,11 +186,23 @@ void DrawGauge(void)
 			pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, NUM_POLYGON, g_GaugeWk[i].vertexWk, sizeof(VERTEX_2D));
 		}
 	}
+
+	/*　枠　*/
+	// 頂点フォーマットの設定
+	pDevice->SetFVF(FVF_VERTEX_2D);
+
+	// テクスチャの設定
+	pDevice->SetTexture(0, g_pD3DTextureWaku);
+
+	// ポリゴンの描画
+	pDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, NUM_POLYGON, g_vertexWkWaku, sizeof(VERTEX_2D));
+
 }
 
 //=============================================================================
 // 頂点の作成
 //=============================================================================
+/*　メーター　*/
 HRESULT MakeVertexGauge(int i)
 {
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
@@ -180,6 +231,36 @@ HRESULT MakeVertexGauge(int i)
 	return S_OK;
 }
 
+/*　枠　*/
+HRESULT MakeVertexWaku(void)
+{
+	// 頂点座標の設定
+	g_vertexWkWaku[0].vtx = D3DXVECTOR3(WAKU_POS_X, WAKU_POS_Y, 0.0f);
+	g_vertexWkWaku[1].vtx = D3DXVECTOR3(WAKU_POS_X + WAKU_TEXTURE_SIZE_X, WAKU_POS_Y, 0.0f);
+	g_vertexWkWaku[2].vtx = D3DXVECTOR3(WAKU_POS_X, WAKU_POS_Y + WAKU_TEXTURE_SIZE_Y, 0.0f);
+	g_vertexWkWaku[3].vtx = D3DXVECTOR3(WAKU_POS_X + WAKU_TEXTURE_SIZE_X, WAKU_POS_Y + WAKU_TEXTURE_SIZE_Y, 0.0f);
+
+	// テクスチャのパースペクティブコレクト用
+	g_vertexWkWaku[0].rhw =
+	g_vertexWkWaku[1].rhw =
+	g_vertexWkWaku[2].rhw =
+	g_vertexWkWaku[3].rhw = 1.0f;
+
+	// 反射光の設定
+	g_vertexWkWaku[0].diffuse = D3DCOLOR_RGBA(255, 255, 255, 255);
+	g_vertexWkWaku[1].diffuse = D3DCOLOR_RGBA(255, 255, 255, 255);
+	g_vertexWkWaku[2].diffuse = D3DCOLOR_RGBA(255, 255, 255, 255);
+	g_vertexWkWaku[3].diffuse = D3DCOLOR_RGBA(255, 255, 255, 255);
+
+	// テクスチャ座標の設定
+	g_vertexWkWaku[0].tex = D3DXVECTOR2(0.0f, 0.0f);
+	g_vertexWkWaku[1].tex = D3DXVECTOR2(1.0f, 0.0f);
+	g_vertexWkWaku[2].tex = D3DXVECTOR2(0.0f, 1.0f);
+	g_vertexWkWaku[3].tex = D3DXVECTOR2(1.0f, 1.0f);
+
+	return S_OK;
+
+}
 
 //=============================================================================
 // テクスチャ座標の設定
