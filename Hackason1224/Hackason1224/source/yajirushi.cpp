@@ -46,8 +46,8 @@ HRESULT InitYajirushi(int type)
 
 
 	// バレットの初期化処理
-	yajirushi.use = false;								// 未使用（発射されていない弾）
-	yajirushi.pos = D3DXVECTOR3(-100.0f, 0.0f, 0.0f);		// 座標データを初期化
+	yajirushi.use = true;								// 未使用（発射されていない弾）
+	yajirushi.pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		// 座標データを初期化
 	yajirushi.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		// 回転データを初期化
 	yajirushi.move = D3DXVECTOR3(YAJIRUSHI_SPEED, YAJIRUSHI_SPEED, 0.0f);	// 移動量を初期化
 	yajirushi.Texture = g_pD3DTextureYajirushi;
@@ -84,16 +84,33 @@ void UpdateYajirushi(void)
 
 	if (yajirushi.use == true)		// 使用している状態なら更新する
 	{
+		yajirushi.key = player->key;
 		//上キー入力されたら
-		if (yajirushi.key == true)
-		{
-			yajirushi.rot.z += 0.05f;
-		}
-		//下キー入力されたら
-		else if (yajirushi.key == false)
+		if (yajirushi.key == 1)
 		{
 			yajirushi.rot.z -= 0.05f;
 		}
+		//下キー入力されたら
+		else if (yajirushi.key == 2)
+		{
+			yajirushi.rot.z += 0.05f;
+		}
+
+		if (yajirushi.rot.z >= 0.0f)
+		{
+			yajirushi.rot.z = 0.0f;
+		}
+
+		if (yajirushi.rot.z <= -1.5f)
+		{
+			yajirushi.rot.z = -1.5f;
+		}
+
+
+
+		yajirushi.pos = player->pos;
+		yajirushi.pos.x += PLAYER_TEXTURE_SIZE_X;
+		yajirushi.pos.y += PLAYER_TEXTURE_SIZE_Y;
 	}
 
 	// 画面外まで進んだ？
@@ -191,7 +208,7 @@ void SetVertexYajirushi(void)
 //=============================================================================
 // バレットの発射設定
 //=============================================================================
-void SetYajirushi(D3DXVECTOR3 pos,bool key)
+void SetYajirushi(D3DXVECTOR3 pos,int key)
 {
 
 	PLAYER *player = GetPlayer();

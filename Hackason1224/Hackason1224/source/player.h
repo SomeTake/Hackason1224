@@ -9,8 +9,8 @@
 
 // マクロ定義
 #define PLAYER_TEXTURE					_T("data/TEXTURE/chara01.png")	// 画像
-#define PLAYER_TEXTURE_SIZE_X			(40/2)		// テクスチャサイズ
-#define PLAYER_TEXTURE_SIZE_Y			(40/2)		// 同上
+#define PLAYER_TEXTURE_SIZE_X			(500/2)		// テクスチャサイズ
+#define PLAYER_TEXTURE_SIZE_Y			(500/2)		// 同上
 
 #define PLAYER_TEXTURE_PATTERN_DIVIDE_X	(3)			// アニメパターンのテクスチャ内分割数（X)
 #define PLAYER_TEXTURE_PATTERN_DIVIDE_Y	(1)			// アニメパターンのテクスチャ内分割数（Y)
@@ -37,7 +37,7 @@ typedef struct	// プレイヤー構造体
 	D3DXVECTOR3		move;						// ポリゴンの座標
 	int				PatternAnim;				// アニメーションパターンナンバー
 	int				CountAnim;					// アニメーションカウント
-	bool            key;                        //true;上↑ false;下↓
+	int             key;                        //0;キー入力なし1;上↑ 2;下↓
 
 	LPDIRECT3DTEXTURE9	Texture;				// テクスチャ情報
 	VERTEX_2D		vertexWk[NUM_VERTEX];		// 頂点情報格納ワーク
