@@ -18,6 +18,8 @@
 #include "../Game/BackGround.h"
 #include "../Game/Flag.h"
 #include "../CircleSceneChanger.h"
+#include "../GameConfig.h"
+#include "../Result/Score.h"
 
 //=============================================================================
 // コンストラクタ
@@ -54,6 +56,7 @@ void SceneManager::Init()
 	resultLogo = new ResultLogo();
 	backGround = new BackGround();
 	flag = new Flag();
+	score = new Score();
 
 	InitGauge(0);
 	//プレイヤーの初期化
@@ -75,6 +78,7 @@ void SceneManager::Uninit()
 	SAFE_DELETE(resultLogo);
 	SAFE_DELETE(backGround);
 	SAFE_DELETE(flag);
+	SAFE_DELETE(score);
 
 	UninitGauge();
 	//プレイヤーの終了処理
@@ -126,9 +130,18 @@ void SceneManager::LoadResource()
 	ResourceManager::Instance()->LoadTexture("ResultLogo", "data/Texture/Result.png");
 	ResourceManager::Instance()->LoadTexture("BackGround", "data/Texture/BackGround.png");
 	ResourceManager::Instance()->LoadTexture("Flag", "data/Texture/Flag.png");
+	ResourceManager::Instance()->LoadTexture("Digit", "data/Texture/Digit.png");
 
 	ResourceManager::Instance()->LoadTexture("Mask", "data/Texture/Circle.png");
 	ResourceManager::Instance()->LoadTexture("Changer", "data/Texture/Load.png");
 	CircleSceneChanger::Instance()->LoadMaskTexture();
 	CircleSceneChanger::Instance()->LoadChangeTexture();
+}
+
+// ゴールと現在の駅がある場所を測る
+void SceneManager::CheckDistance()
+{
+	D3DXVECTOR3 vec = GameConfig::Const::StartPosition - GameConfig::Const::GoalPosition; // 実際には落下した位置と比較する
+	ResultDistance = D3DXVec3Length(&vec);
+	ResultDistance = abs(ResultDistance);
 }

@@ -2,9 +2,26 @@
 #include "../Title/TitleLogo.h"
 #include "../input.h"
 #include "../CircleSceneChanger.h"
+#include "../station.h"
+#include "../yajirushi.h"
+#include "../player.h"
+#include "../../gauge.h"
 
 void SceneManager::SceneTitle::OnStart(SceneManager & entity)
 {
+
+	InitGauge(1);
+	//プレイヤーの初期化
+	InitPlayer(1);
+
+	//矢印の初期化
+	InitYajirushi(1);
+
+	//駅の初期化
+	InitStation(1);
+
+	// 結果の初期化
+	entity.ResultDistance = 0.0f;
 
 	//*********************************************************
 	// シーンチェンジの終了
