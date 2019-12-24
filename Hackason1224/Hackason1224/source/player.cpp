@@ -199,38 +199,6 @@ void SetTexturePlayer( int cntPattern )
 	float ul = cntPattern * tw;
 	float ur = (cntPattern + PLAYER_TEXTURE_PATTERN_DIVIDE_Y) *tw;
 
-	//if (player.direction == 0)
-	//{
-	//	player.vertexWk[0].tex = D3DXVECTOR2(ul, 0.0f);
-	//	player.vertexWk[1].tex = D3DXVECTOR2(ur, 0.0f);
-	//	player.vertexWk[2].tex = D3DXVECTOR2(ul, 0.25f);
-	//	player.vertexWk[3].tex = D3DXVECTOR2(ur, 0.25f);
-	//}
-
-	//
-	//if (player.direction == 1)
-	//{
-	//	player.vertexWk[0].tex = D3DXVECTOR2(ul, 0.5f);
-	//	player.vertexWk[1].tex = D3DXVECTOR2(ur, 0.5f);
-	//	player.vertexWk[2].tex = D3DXVECTOR2(ul, 0.75f);
-	//	player.vertexWk[3].tex = D3DXVECTOR2(ur, 0.75f);
-	//}
-	//else if (player.direction == 2)
-	//{
-	//	player.vertexWk[0].tex = D3DXVECTOR2(ul, 0.25f);
-	//	player.vertexWk[1].tex = D3DXVECTOR2(ur, 0.25f);
-	//	player.vertexWk[2].tex = D3DXVECTOR2(ul, 0.5f);
-	//	player.vertexWk[3].tex = D3DXVECTOR2(ur, 0.5f);
-	//}
-
-	//if (player.direction == 3)
-	//{
-	//	player.vertexWk[0].tex = D3DXVECTOR2(ul, 0.75f);
-	//	player.vertexWk[1].tex = D3DXVECTOR2(ur, 0.75f);
-	//	player.vertexWk[2].tex = D3DXVECTOR2(ul, 1.0f);
-	//	player.vertexWk[3].tex = D3DXVECTOR2(ur, 1.0f);
-	//}
-
 }
 
 //=============================================================================
