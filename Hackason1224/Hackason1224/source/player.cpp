@@ -78,16 +78,12 @@ void UpdatePlayer(void)
 	if (GetKeyboardPress(DIK_DOWN) || GetKeyboardPress(DIK_S))
 	{
 		player.key = 2;
-		player.anim = true;
-
 		player.cnt = 0;
 
 	}
 	else if (GetKeyboardPress(DIK_UP) || GetKeyboardPress(DIK_W))
 	{
 		player.key = 1;
-		player.anim = true;
-
 		player.cnt = 0;
 
 	}
