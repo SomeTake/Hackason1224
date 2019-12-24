@@ -50,6 +50,7 @@ HRESULT InitPlayer(int type)
 		player.PatternAnim = 1;		// アニメパターン番号をランダムで初期化
 		player.CountAnim = 0;										// アニメカウントを初期化
 		player.Texture = g_pD3DTexturePlayer;
+		player.key = 0;
 
 		player.cnt = 0;//カウント
 		player.b_type = 0;//カウント
@@ -86,16 +87,30 @@ void UpdatePlayer(void)
 
 	player.anim = false;
 
+	player.key = 0;
+
 	if (GetKeyboardPress(DIK_DOWN) || GetKeyboardPress(DIK_S)/*|| IsButtonPressed(0, BUTTON_DOWN)*/)
 	{
-		player.key = false;
+		player.key = 2;
+		player.anim = true;
+
+		player.cnt = 0;
+
 		//player.CountAnim++;
 	}
-	if (GetKeyboardPress(DIK_UP) || GetKeyboardPress(DIK_W) /*|| IsButtonPressed(0, BUTTON_UP)*/)
+	else if (GetKeyboardPress(DIK_UP) || GetKeyboardPress(DIK_W) /*|| IsButtonPressed(0, BUTTON_UP)*/)
 	{
-		player.key = true;
+		player.key = 1;
+		player.anim = true;
+
+		player.cnt = 0;
+
 		//player.CountAnim++;
 	}
+	//key = player.key;
+
+	//SetYajirushi(pos, key);
+
 
 	//アニメーション
 	if (player.anim==true)
@@ -112,17 +127,9 @@ void UpdatePlayer(void)
 	}
 
 	// 矢印設定
-	if (GetKeyboardTrigger(DIK_P))
-	{
-		bool key;
-		key = player.key;
-		D3DXVECTOR3 pos = player.pos;
-		pos.y += PLAYER_TEXTURE_SIZE_X;
-		player.anim = true;
-		
-		SetYajirushi(pos,key);
-		player.cnt = 0;
-	}
+	//if (GetKeyboardTrigger(DIK_P))
+	//{
+	//}
 
 
 	SetVertexPlayer();	// 移動後の座標で頂点を設定

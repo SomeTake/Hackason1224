@@ -8,11 +8,11 @@
 
 
 // マクロ定義
-#define YAJIRUSHI_TEXTURE			_T("data/TEXTURE/斬撃2.png")	// 画像
-#define YAJIRUSHI_TEXTURE_SIZE_X	(60)		// テクスチャサイズ
-#define YAJIRUSHI_TEXTURE_SIZE_Y	(60)		// 同上
+#define YAJIRUSHI_TEXTURE			_T("data/Texture/yajirushi.png")	// 画像
+#define YAJIRUSHI_TEXTURE_SIZE_X	(300)		// テクスチャサイズ
+#define YAJIRUSHI_TEXTURE_SIZE_Y	(120)		// 同上
 
-#define YAJIRUSHI_TEXTURE_PATTERN_DIVIDE_X	(5)	// アニメパターンのテクスチャ内分割数（X)
+#define YAJIRUSHI_TEXTURE_PATTERN_DIVIDE_X	(1)	// アニメパターンのテクスチャ内分割数（X)
 #define YAJIRUSHI_TEXTURE_PATTERN_DIVIDE_Y	(1)	// アニメパターンのテクスチャ内分割数（Y)
 #define YAJIRUSHI_ANIM_PATTERN_NUM			(YAJIRUSHI_TEXTURE_PATTERN_DIVIDE_X*YAJIRUSHI_TEXTURE_PATTERN_DIVIDE_Y)	// アニメーションパターン数
 #define YAJIRUSHI_TIME_ANIMATION			(4)	// アニメーションの切り替わるカウント
@@ -30,7 +30,7 @@
 
 typedef struct	// バレット構造体
 {
-	bool            key;                        //true;上↑ false;下↓
+	int             key;                        //0;キー入力なし1;上↑ 2;下↓
 	bool			use;						// true:使用  false:未使用
 	D3DXVECTOR3		pos;						// ポリゴンの移動量
 	D3DXVECTOR3		rot;						// ポリゴンの回転量
@@ -53,7 +53,7 @@ HRESULT InitYajirushi(int type);
 void UninitYajirushi(void);
 void UpdateYajirushi(void);
 void DrawYajirushi(void);
-void SetYajirushi(D3DXVECTOR3 pos,bool key);
+void SetYajirushi(D3DXVECTOR3 pos,int key);
 YAJIRUSHI *GetYajirushi(void);
 
 
