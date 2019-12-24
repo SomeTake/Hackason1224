@@ -16,6 +16,7 @@
 class TitleLogo;
 class ResultLogo;
 class BackGround;
+class Flag;
 //****************************************************
 // ƒNƒ‰ƒX’è‹`
 //****************************************************
@@ -59,5 +60,6 @@ private:
 	TitleLogo* titleLogo;
 	ResultLogo* resultLogo;
 	BackGround* backGround;
+	Flag* flag;
 };
 #endif
