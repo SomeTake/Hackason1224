@@ -5,6 +5,8 @@
 //=============================================================================
 #include "../../main.h"
 #include "gauge.h"
+#include "source/input.h"
+
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
@@ -24,6 +26,7 @@ static LPDIRECT3DTEXTURE9		g_pD3DTextureGauge = NULL;		// テクスチャへのポリゴン
 static GAUGE					g_GaugeWk[GAUGE_MAX];				// 構造体
 
 static float g_Gauge;
+static float g_Power;			// 0.0～1.0の値
 //=============================================================================
 // 初期化処理
 //=============================================================================
@@ -50,6 +53,8 @@ HRESULT InitGauge(int type)
 		g_GaugeWk[i].Texture = g_pD3DTextureGauge;
 
 		g_GaugeWk[i].count = 0;
+		g_GaugeWk[i].Isfinished = false;
+
 
 		g_Gauge = 0.0f;
 
@@ -91,19 +96,29 @@ void UpdateGauge(void)
 				SetTextureGauge(i, g_GaugeWk[i].PatternAnim);
 			}
 
-			g_GaugeWk[i].count++;
-			if (g_GaugeWk[i].count == 60)
+			if (g_GaugeWk[i].Isfinished == false)
 			{
-				g_GaugeWk[i].count = 0;
+				g_GaugeWk[i].count++;
+				if (g_GaugeWk[i].count == LOOP_COUNT)
+				{
+					g_GaugeWk[i].count = 0;
+				}
+
+				if (g_GaugeWk[i].count < 30)
+				{
+					g_Gauge += 100 / 30;
+				}
+				else
+				{
+					g_Gauge -= 100 / 30;
+				}
 			}
 
-			if (g_GaugeWk[i].count < 30)
+			if (GetKeyboardTrigger(DIK_RETURN))
 			{
-				g_Gauge += 100/30;
-			}
-			else
-			{
-				g_Gauge -= 100/30;
+				g_GaugeWk[i].Isfinished = true;
+
+				g_Power = g_Gauge / GAUGE_METER_MAX;
 			}
 
 			SetVertexGauge(i);						// 移動後の座標で頂点を設定
@@ -220,4 +235,12 @@ GAUGE *Get(void)
 float GetGauge(void)
 {
 	return g_Gauge;
+}
+
+//=============================================================================
+// 取得関数
+//=============================================================================
+float GetPower(void)
+{
+	return g_Power;
 }

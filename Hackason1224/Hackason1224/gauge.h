@@ -26,6 +26,8 @@
 
 #define GAUGE_METER_MAX	(100)											// 最大数
 
+
+#define LOOP_COUNT		(60)
 typedef struct	// 構造体
 {
 	bool			use;						// true:使用  false:未使用
@@ -37,6 +39,8 @@ typedef struct	// 構造体
 	VERTEX_2D		vertexWk[NUM_VERTEX];		// 頂点情報格納ワーク
 
 	int	count;
+
+	bool	Isfinished;
 } GAUGE;
 
 //*****************************************************************************
@@ -48,3 +52,4 @@ void UpdateGauge(void);
 void DrawGauge(void);
 
 float GetGauge(void);
+float GetPower(void);

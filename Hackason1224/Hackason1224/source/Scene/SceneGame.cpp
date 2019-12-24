@@ -32,13 +32,13 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 
 void SceneManager::SceneGame::OnDraw(SceneManager & entity)
 {
+	// ”wŒi‚Ì•`‰æ
+	entity.backGround->Draw();
+
 	DrawGauge();
 	//ƒvƒŒƒCƒ„[‚Ì•`‰æˆ—
 	DrawPlayer();
 
 	//–îˆó‚Ì•`‰æˆ—
 	DrawYajirushi();
-
-	// ”wŒi‚Ì•`‰æ
-	entity.backGround->Draw();
 }
