@@ -7,6 +7,10 @@
     <ClCompile Include="source\Scene\SceneGame.cpp" />
     <ClCompile Include="source\Scene\SceneResult.cpp" />
     <ClCompile Include="source\input.cpp" />
+    <ClCompile Include="source\Title\TitleLogo.cpp" />
+    <ClCompile Include="source\Resource\ResourceManager.cpp" />
+    <ClCompile Include="source\Core\Object.cpp" />
+    <ClCompile Include="source\Result\ResultLogo.cpp" />
     <ClCompile Include="source\yajirushi.cpp" />
     <ClCompile Include="source\player.cpp" />
   </ItemGroup>
@@ -18,6 +22,11 @@
     <ClInclude Include="source\Scene\SceneGame.h" />
     <ClInclude Include="source\Scene\SceneResult.h" />
     <ClInclude Include="source\input.h" />
+    <ClInclude Include="source\Title\TitleLogo.h" />
+    <ClInclude Include="source\Resource\ResourceManager.h" />
+    <ClInclude Include="source\Resource\BaseSingleton.h" />
+    <ClInclude Include="source\Core\Object.h" />
+    <ClInclude Include="source\Result\ResultLogo.h" />
     <ClInclude Include="source\player.h" />
     <ClInclude Include="source\yajirushi.h" />
   </ItemGroup>
