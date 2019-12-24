@@ -16,6 +16,7 @@
 #include "../yajirushi.h"
 #include "../Game/BackGround.h"
 #include "../Game/Flag.h"
+#include "../CircleSceneChanger.h"
 
 //=============================================================================
 // コンストラクタ
@@ -83,12 +84,20 @@ void SceneManager::Update()
 {
 	// ステートマシンの更新
 	State next = fsm[currentState]->OnUpdate(*this);
+
+	CircleSceneChanger::Instance()->Update();
 }
 
 void SceneManager::Draw()
 {
+	// ステンシルマスクの描画
+	CircleSceneChanger::Instance()->DrawMask();
+
 	// ステートマシンの描画
 	fsm[currentState]->OnDraw(*this);
+
+	// シーンチェンジャーの描画
+	CircleSceneChanger::Instance()->DrawChanger();
 }
 
 void SceneManager::ChangeState(State next)
@@ -109,4 +118,9 @@ void SceneManager::LoadResource()
 	ResourceManager::Instance()->LoadTexture("ResultLogo", "data/Texture/Result.png");
 	ResourceManager::Instance()->LoadTexture("BackGround", "data/Texture/BackGround.png");
 	ResourceManager::Instance()->LoadTexture("Flag", "data/Texture/Flag.png");
+
+	ResourceManager::Instance()->LoadTexture("Mask", "data/Texture/Circle.png");
+	ResourceManager::Instance()->LoadTexture("Changer", "data/Texture/Load.png");
+	CircleSceneChanger::Instance()->LoadMaskTexture();
+	CircleSceneChanger::Instance()->LoadChangeTexture();
 }

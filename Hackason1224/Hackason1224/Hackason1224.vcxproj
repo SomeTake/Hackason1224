@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="gauge.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="source\CircleSceneChanger.cpp" />
     <ClCompile Include="source\Core\Object.cpp" />
     <ClCompile Include="source\GameConfig.cpp" />
     <ClCompile Include="source\Game\BackGround.cpp" />
@@ -135,6 +136,7 @@
     <ClCompile Include="source\Resource\ResourceManager.cpp" />
     <ClCompile Include="source\Result\ResultLogo.cpp" />
     <ClCompile Include="source\player.cpp" />
+    <ClCompile Include="source\SceneChanger.cpp" />
     <ClCompile Include="source\Scene\SceneGame.cpp" />
     <ClCompile Include="source\Scene\SceneManager.cpp" />
     <ClCompile Include="source\Scene\SceneResult.cpp" />
@@ -145,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="gauge.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="source\CircleSceneChanger.h" />
     <ClInclude Include="source\Core\Object.h" />
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\Game\BackGround.h" />
@@ -154,6 +157,7 @@
     <ClInclude Include="source\Resource\ResourceManager.h" />
     <ClInclude Include="source\Result\ResultLogo.h" />
     <ClInclude Include="source\player.h" />
+    <ClInclude Include="source\SceneChanger.h" />
     <ClInclude Include="source\Scene\BaseState.h" />
     <ClInclude Include="source\Scene\SceneGame.h" />
     <ClInclude Include="source\Scene\SceneManager.h" />

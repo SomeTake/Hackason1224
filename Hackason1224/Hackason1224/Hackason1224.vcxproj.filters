@@ -17,6 +17,8 @@
     <ClCompile Include="source\Game\BackGround.cpp" />
     <ClCompile Include="source\Game\Flag.cpp" />
     <ClCompile Include="source\GameConfig.cpp" />
+    <ClCompile Include="source\SceneChanger.cpp" />
+    <ClCompile Include="source\CircleSceneChanger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -37,5 +39,7 @@
     <ClInclude Include="source\Game\BackGround.h" />
     <ClInclude Include="source\Game\Flag.h" />
     <ClInclude Include="source\GameConfig.h" />
+    <ClInclude Include="source\SceneChanger.h" />
+    <ClInclude Include="source\CircleSceneChanger.h" />
   </ItemGroup>
 </Project>
