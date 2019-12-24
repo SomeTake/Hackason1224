@@ -8,7 +8,7 @@
 #include "SceneTitle.h"
 #include "SceneGame.h"
 #include "SceneResult.h"
-
+#include "../../gauge.h"
 //=============================================================================
 // コンストラクタ
 //=============================================================================
@@ -37,6 +37,7 @@ SceneManager::~SceneManager()
 
 void SceneManager::Init()
 {
+	InitGauge(1);
 
 	// 初期シーンを設定
 	ChangeState(State::Title);
@@ -44,6 +45,7 @@ void SceneManager::Init()
 
 void SceneManager::Uninit()
 {
+	UninitGauge();
 }
 
 void SceneManager::Update()
