@@ -15,6 +15,7 @@
 #include "../player.h"
 #include "../yajirushi.h"
 #include "../Game/BackGround.h"
+#include "../Game/Flag.h"
 
 //=============================================================================
 // コンストラクタ
@@ -50,8 +51,9 @@ void SceneManager::Init()
 	titleLogo = new TitleLogo();
 	resultLogo = new ResultLogo();
 	backGround = new BackGround();
+	flag = new Flag();
 
-	InitGauge(1);
+	InitGauge(0);
 	//プレイヤーの初期化
 	InitPlayer(0);
 
@@ -67,6 +69,7 @@ void SceneManager::Uninit()
 	SAFE_DELETE(titleLogo);
 	SAFE_DELETE(resultLogo);
 	SAFE_DELETE(backGround);
+	SAFE_DELETE(flag);
 
 	UninitGauge();
 	//プレイヤーの終了処理
@@ -105,4 +108,5 @@ void SceneManager::LoadResource()
 	ResourceManager::Instance()->LoadTexture("TitleLogo", "data/Texture/Title.png");
 	ResourceManager::Instance()->LoadTexture("ResultLogo", "data/Texture/Result.png");
 	ResourceManager::Instance()->LoadTexture("BackGround", "data/Texture/BackGround.png");
+	ResourceManager::Instance()->LoadTexture("Flag", "data/Texture/Flag.png");
 }

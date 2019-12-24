@@ -4,6 +4,7 @@
 #include "../player.h"
 #include "../yajirushi.h"
 #include "../Game/BackGround.h"
+#include "../Game/Flag.h"
 
 void SceneManager::SceneGame::OnStart(SceneManager & entity)
 {
@@ -24,6 +25,9 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 	//–îˆó‚ÌXVˆ—
 	UpdateYajirushi();
 
+	// ƒS[ƒ‹ƒtƒ‰ƒbƒO
+	entity.flag->Update();
+
 	// ”wŒi
 	entity.backGround->Update();
 
@@ -32,6 +36,9 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 
 void SceneManager::SceneGame::OnDraw(SceneManager & entity)
 {
+	// ”wŒi‚Ì•`‰æ
+	entity.backGround->Draw();
+
 	DrawGauge();
 	//ƒvƒŒƒCƒ„[‚Ì•`‰æˆ—
 	DrawPlayer();
@@ -39,6 +46,6 @@ void SceneManager::SceneGame::OnDraw(SceneManager & entity)
 	//–îˆó‚Ì•`‰æˆ—
 	DrawYajirushi();
 
-	// ”wŒi‚Ì•`‰æ
-	entity.backGround->Draw();
+	// ƒS[ƒ‹ƒtƒ‰ƒbƒO
+	entity.flag->Draw();
 }
