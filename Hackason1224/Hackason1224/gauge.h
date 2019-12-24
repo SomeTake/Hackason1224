@@ -51,4 +51,4 @@ void UninitGauge(void);
 void UpdateGauge(void);
 void DrawGauge(void);
 
-int GetGauge(void);
+float GetGauge(void);

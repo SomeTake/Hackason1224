@@ -9,6 +9,9 @@
 #include "SceneGame.h"
 #include "SceneResult.h"
 #include "../../gauge.h"
+#include "../player.h"
+#include "../yajirushi.h"
+
 //=============================================================================
 // コンストラクタ
 //=============================================================================
@@ -38,6 +41,11 @@ SceneManager::~SceneManager()
 void SceneManager::Init()
 {
 	InitGauge(1);
+	//プレイヤーの初期化
+	InitPlayer(0);
+
+	//矢印の初期化
+	InitYajirushi(0);
 
 	// 初期シーンを設定
 	ChangeState(State::Title);
@@ -46,6 +54,11 @@ void SceneManager::Init()
 void SceneManager::Uninit()
 {
 	UninitGauge();
+	//プレイヤーの終了処理
+	UninitPlayer();
+
+	//矢印の終了処理
+	UninitYajirushi();
 }
 
 void SceneManager::Update()

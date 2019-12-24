@@ -108,7 +108,7 @@ void UpdateGauge(void)
 				SetTextureGauge(i, hp_meterWk[i].PatternAnim);
 			}
 
-			g_Gauge + 10;
+			g_Gauge += 10;
 			if (g_Gauge == 100)
 			{
 				g_Gauge = g_Gauge - 10;
@@ -282,7 +282,7 @@ GAUGE *Get(void)
 //=============================================================================
 // æ“¾ŠÖ”
 //=============================================================================
-int GetGauge(void)
+float GetGauge(void)
 {
 	return g_Gauge;
 }
