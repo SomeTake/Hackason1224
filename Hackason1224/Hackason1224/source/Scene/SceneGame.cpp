@@ -1,5 +1,6 @@
 #include "SceneGame.h"
 #include "../input.h"
+#include "../../gauge.h"
 #include "../player.h"
 #include "../yajirushi.h"
 
@@ -14,6 +15,8 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 	{
 		entity.ChangeState(State::Result);
 	}
+
+	UpdateGauge();
 	//プレイヤーの更新処理
 	UpdatePlayer();
 
@@ -25,10 +28,10 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 
 void SceneManager::SceneGame::OnDraw(SceneManager & entity)
 {
+	DrawGauge();
 	//プレイヤーの描画処理
 	DrawPlayer();
 
 	//矢印の描画処理
 	DrawYajirushi();
-
 }

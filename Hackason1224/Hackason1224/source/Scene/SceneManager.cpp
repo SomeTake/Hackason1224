@@ -11,6 +11,7 @@
 #include "../Title/TitleLogo.h"
 #include "../Result/ResultLogo.h"
 #include "../Resource/ResourceManager.h"
+#include "../../gauge.h"
 #include "../player.h"
 #include "../yajirushi.h"
 
@@ -49,6 +50,7 @@ void SceneManager::Init()
 	titleLogo = new TitleLogo();
 	resultLogo = new ResultLogo();
 
+	InitGauge(1);
 	//プレイヤーの初期化
 	InitPlayer(0);
 
@@ -64,6 +66,7 @@ void SceneManager::Uninit()
 	SAFE_DELETE(titleLogo);
 	SAFE_DELETE(resultLogo);
 
+	UninitGauge();
 	//プレイヤーの終了処理
 	UninitPlayer();
 
