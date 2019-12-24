@@ -62,7 +62,6 @@ typedef struct	// プレイヤー構造体
 HRESULT InitPlayer(int type);
 void UninitPlayer(void);
 void UpdatePlayer(void);
-void UpdatePlayerLineOver(void);
 void DrawPlayer(void);
 PLAYER *GetPlayer(void);
 

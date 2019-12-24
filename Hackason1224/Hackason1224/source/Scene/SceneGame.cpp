@@ -2,6 +2,7 @@
 #include "../input.h"
 #include "../../gauge.h"
 #include "../player.h"
+#include "../station.h"
 #include "../yajirushi.h"
 #include "../Game/BackGround.h"
 
@@ -24,6 +25,10 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 	//–îˆó‚ÌXVˆ—
 	UpdateYajirushi();
 
+	//‰w‚ÌXVˆ—
+	UpdateStation();
+
+
 	// ”wŒi
 	entity.backGround->Update();
 
@@ -32,6 +37,10 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 
 void SceneManager::SceneGame::OnDraw(SceneManager & entity)
 {
+
+	// ”wŒi‚Ì•`‰æ
+	entity.backGround->Draw();
+
 	DrawGauge();
 	//ƒvƒŒƒCƒ„[‚Ì•`‰æˆ—
 	DrawPlayer();
@@ -39,6 +48,8 @@ void SceneManager::SceneGame::OnDraw(SceneManager & entity)
 	//–îˆó‚Ì•`‰æˆ—
 	DrawYajirushi();
 
-	// ”wŒi‚Ì•`‰æ
-	entity.backGround->Draw();
+	//‰w‚Ì•`‰æˆ—
+	DrawStation();
+
+
 }

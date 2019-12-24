@@ -13,6 +13,7 @@
 #include "../Resource/ResourceManager.h"
 #include "../../gauge.h"
 #include "../player.h"
+#include "../station.h"
 #include "../yajirushi.h"
 #include "../Game/BackGround.h"
 
@@ -51,12 +52,15 @@ void SceneManager::Init()
 	resultLogo = new ResultLogo();
 	backGround = new BackGround();
 
-	InitGauge(1);
+	InitGauge(0);
 	//プレイヤーの初期化
 	InitPlayer(0);
 
 	//矢印の初期化
 	InitYajirushi(0);
+
+	//駅の初期化
+	InitStation(0);
 
 	// 初期シーンを設定
 	ChangeState(State::Title);
@@ -74,6 +78,10 @@ void SceneManager::Uninit()
 
 	//矢印の終了処理
 	UninitYajirushi();
+
+	//駅の終了処理
+	UninitStation();
+
 }
 
 void SceneManager::Update()
