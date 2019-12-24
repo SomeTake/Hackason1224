@@ -129,11 +129,13 @@
     <ClCompile Include="source\input.cpp" />
     <ClCompile Include="source\Resource\ResourceManager.cpp" />
     <ClCompile Include="source\Result\ResultLogo.cpp" />
+    <ClCompile Include="source\player.cpp" />
     <ClCompile Include="source\Scene\SceneGame.cpp" />
     <ClCompile Include="source\Scene\SceneManager.cpp" />
     <ClCompile Include="source\Scene\SceneResult.cpp" />
     <ClCompile Include="source\Scene\SceneTitle.cpp" />
     <ClCompile Include="source\Title\TitleLogo.cpp" />
+    <ClCompile Include="source\yajirushi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -142,12 +144,14 @@
     <ClInclude Include="source\Resource\BaseSingleton.h" />
     <ClInclude Include="source\Resource\ResourceManager.h" />
     <ClInclude Include="source\Result\ResultLogo.h" />
+    <ClInclude Include="source\player.h" />
     <ClInclude Include="source\Scene\BaseState.h" />
     <ClInclude Include="source\Scene\SceneGame.h" />
     <ClInclude Include="source\Scene\SceneManager.h" />
     <ClInclude Include="source\Scene\SceneResult.h" />
     <ClInclude Include="source\Scene\SceneTitle.h" />
     <ClInclude Include="source\Title\TitleLogo.h" />
+    <ClInclude Include="source\yajirushi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
