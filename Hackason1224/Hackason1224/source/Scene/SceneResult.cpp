@@ -8,11 +8,13 @@
 #include "../yajirushi.h"
 #include "../Game/BackGround.h"
 #include "../Game/Flag.h"
+#include "../Result/Score.h"
 
 void SceneManager::SceneResult::OnStart(SceneManager & entity)
 {
 	// 距離の計算
 	entity.CheckDistance();
+	entity.score->SetScore(entity.ResultDistance);
 
 	//*********************************************************
 	// シーンチェンジの終了
@@ -22,6 +24,7 @@ void SceneManager::SceneResult::OnStart(SceneManager & entity)
 SceneManager::State SceneManager::SceneResult::OnUpdate(SceneManager & entity)
 {
 	entity.resultLogo->Update();
+	entity.score->Update();
 
 	// とりあえずスペースキー押したらタイトルへ
 	if (GetKeyboardTrigger(DIK_SPACE))
@@ -53,6 +56,6 @@ void SceneManager::SceneResult::OnDraw(SceneManager & entity)
 	// ゴールフラッグ
 	entity.flag->Draw();
 
-
 	entity.resultLogo->Draw();
+	entity.score->Draw();
 }

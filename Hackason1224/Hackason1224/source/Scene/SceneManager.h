@@ -17,6 +17,7 @@ class TitleLogo;
 class ResultLogo;
 class BackGround;
 class Flag;
+class Score;
 //****************************************************
 // ƒNƒ‰ƒX’è‹`
 //****************************************************
@@ -64,6 +65,7 @@ private:
 	ResultLogo* resultLogo;
 	BackGround* backGround;
 	Flag* flag;
+	Score* score;
 
 	// Œ‹‰Ê‚Ì‹——£
 	float ResultDistance;
