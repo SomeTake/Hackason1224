@@ -2,6 +2,12 @@
 #include "../input.h"
 #include "../Result/ResultLogo.h"
 #include "../CircleSceneChanger.h"
+#include "../../gauge.h"
+#include "../player.h"
+#include "../station.h"
+#include "../yajirushi.h"
+#include "../Game/BackGround.h"
+#include "../Game/Flag.h"
 
 void SceneManager::SceneResult::OnStart(SceneManager & entity)
 {
@@ -29,5 +35,22 @@ SceneManager::State SceneManager::SceneResult::OnUpdate(SceneManager & entity)
 
 void SceneManager::SceneResult::OnDraw(SceneManager & entity)
 {
+	// ”wŒi‚Ì•`‰æ
+	entity.backGround->Draw();
+
+	DrawGauge();
+	//ƒvƒŒƒCƒ„[‚Ì•`‰æˆ—
+	DrawPlayer();
+
+	//–îˆó‚Ì•`‰æˆ—
+	DrawYajirushi();
+
+	//‰w‚Ì•`‰æˆ—
+	DrawStation();
+
+	// ƒS[ƒ‹ƒtƒ‰ƒbƒO
+	entity.flag->Draw();
+
+
 	entity.resultLogo->Draw();
 }
