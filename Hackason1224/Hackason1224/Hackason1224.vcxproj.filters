@@ -6,6 +6,7 @@
     <ClCompile Include="source\Scene\SceneTitle.cpp" />
     <ClCompile Include="source\Scene\SceneGame.cpp" />
     <ClCompile Include="source\Scene\SceneResult.cpp" />
+    <ClCompile Include="gauge.cpp" />
     <ClCompile Include="source\input.cpp" />
     <ClCompile Include="source\Title\TitleLogo.cpp" />
     <ClCompile Include="source\Resource\ResourceManager.cpp" />
@@ -22,6 +23,7 @@
     <ClInclude Include="source\Scene\SceneTitle.h" />
     <ClInclude Include="source\Scene\SceneGame.h" />
     <ClInclude Include="source\Scene\SceneResult.h" />
+    <ClInclude Include="gauge.h" />
     <ClInclude Include="source\input.h" />
     <ClInclude Include="source\Title\TitleLogo.h" />
     <ClInclude Include="source\Resource\ResourceManager.h" />

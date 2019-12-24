@@ -84,13 +84,16 @@ void UpdateYajirushi(void)
 
 	if (yajirushi.use == true)		// 使用している状態なら更新する
 	{
-		yajirushi.rot.z = D3DX_PI / 2;
-
-
-			yajirushi.pos.x -= yajirushi.move.x;
-			yajirushi.pos.y -= yajirushi.move.y;
-			//yajirushi.rot.z =  D3DX_PI/4;										// 左斜め４５度向き
-
+		//上キー入力されたら
+		if (yajirushi.key == true)
+		{
+			yajirushi.rot.z += 0.05f;
+		}
+		//下キー入力されたら
+		else if (yajirushi.key == false)
+		{
+			yajirushi.rot.z -= 0.05f;
+		}
 	}
 
 	// 画面外まで進んだ？
@@ -188,7 +191,7 @@ void SetVertexYajirushi(void)
 //=============================================================================
 // バレットの発射設定
 //=============================================================================
-void SetYajirushi(D3DXVECTOR3 pos)
+void SetYajirushi(D3DXVECTOR3 pos,bool key)
 {
 
 	PLAYER *player = GetPlayer();
@@ -199,6 +202,7 @@ void SetYajirushi(D3DXVECTOR3 pos)
 	{
 		yajirushi.use = true;			// 使用状態へ変更する
 		yajirushi.pos = pos;			// 座標をセット
+		yajirushi.key = key;           //true;上↑ false;下↓
 		return;							// 1発セットしたので終了する
 	}
 }
