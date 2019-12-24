@@ -13,8 +13,11 @@
 #include "../Resource/ResourceManager.h"
 #include "../../gauge.h"
 #include "../player.h"
+#include "../station.h"
 #include "../yajirushi.h"
 #include "../Game/BackGround.h"
+#include "../Game/Flag.h"
+#include "../CircleSceneChanger.h"
 
 //=============================================================================
 // コンストラクタ
@@ -50,6 +53,7 @@ void SceneManager::Init()
 	titleLogo = new TitleLogo();
 	resultLogo = new ResultLogo();
 	backGround = new BackGround();
+	flag = new Flag();
 
 	InitGauge(0);
 	//プレイヤーの初期化
@@ -57,6 +61,9 @@ void SceneManager::Init()
 
 	//矢印の初期化
 	InitYajirushi(0);
+
+	//駅の初期化
+	InitStation(0);
 
 	// 初期シーンを設定
 	ChangeState(State::Title);
@@ -67,6 +74,7 @@ void SceneManager::Uninit()
 	SAFE_DELETE(titleLogo);
 	SAFE_DELETE(resultLogo);
 	SAFE_DELETE(backGround);
+	SAFE_DELETE(flag);
 
 	UninitGauge();
 	//プレイヤーの終了処理
@@ -74,18 +82,30 @@ void SceneManager::Uninit()
 
 	//矢印の終了処理
 	UninitYajirushi();
+
+	//駅の終了処理
+	UninitStation();
+
 }
 
 void SceneManager::Update()
 {
 	// ステートマシンの更新
 	State next = fsm[currentState]->OnUpdate(*this);
+
+	CircleSceneChanger::Instance()->Update();
 }
 
 void SceneManager::Draw()
 {
+	// ステンシルマスクの描画
+	CircleSceneChanger::Instance()->DrawMask();
+
 	// ステートマシンの描画
 	fsm[currentState]->OnDraw(*this);
+
+	// シーンチェンジャーの描画
+	CircleSceneChanger::Instance()->DrawChanger();
 }
 
 void SceneManager::ChangeState(State next)
@@ -105,4 +125,10 @@ void SceneManager::LoadResource()
 	ResourceManager::Instance()->LoadTexture("TitleLogo", "data/Texture/Title.png");
 	ResourceManager::Instance()->LoadTexture("ResultLogo", "data/Texture/Result.png");
 	ResourceManager::Instance()->LoadTexture("BackGround", "data/Texture/BackGround.png");
+	ResourceManager::Instance()->LoadTexture("Flag", "data/Texture/Flag.png");
+
+	ResourceManager::Instance()->LoadTexture("Mask", "data/Texture/Circle.png");
+	ResourceManager::Instance()->LoadTexture("Changer", "data/Texture/Load.png");
+	CircleSceneChanger::Instance()->LoadMaskTexture();
+	CircleSceneChanger::Instance()->LoadChangeTexture();
 }

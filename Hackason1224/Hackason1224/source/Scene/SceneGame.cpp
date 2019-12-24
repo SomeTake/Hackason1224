@@ -2,11 +2,18 @@
 #include "../input.h"
 #include "../../gauge.h"
 #include "../player.h"
+#include "../station.h"
 #include "../yajirushi.h"
 #include "../Game/BackGround.h"
+#include "../Game/Flag.h"
+#include "../CircleSceneChanger.h"
 
 void SceneManager::SceneGame::OnStart(SceneManager & entity)
 {
+
+	//*********************************************************
+	// シーンチェンジの終了
+	CircleSceneChanger::Instance()->SetChanger(false);
 }
 
 SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
@@ -14,7 +21,10 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 	// とりあえずスペースキー押したらリザルトへ
 	if (GetKeyboardTrigger(DIK_SPACE))
 	{
-		entity.ChangeState(State::Result);
+		CircleSceneChanger::Instance()->SetChanger(true, [&]()
+		{
+			entity.ChangeState(State::Result);
+		});
 	}
 
 	UpdateGauge();
@@ -24,6 +34,12 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 	//矢印の更新処理
 	UpdateYajirushi();
 
+	//駅の更新処理
+	UpdateStation();
+
+	// ゴールフラッグ
+	entity.flag->Update();
+
 	// 背景
 	entity.backGround->Update();
 
@@ -32,6 +48,7 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 
 void SceneManager::SceneGame::OnDraw(SceneManager & entity)
 {
+
 	// 背景の描画
 	entity.backGround->Draw();
 
@@ -41,4 +58,11 @@ void SceneManager::SceneGame::OnDraw(SceneManager & entity)
 
 	//矢印の描画処理
 	DrawYajirushi();
+
+	//駅の描画処理
+	DrawStation();
+
+
+	// ゴールフラッグ
+	entity.flag->Draw();
 }

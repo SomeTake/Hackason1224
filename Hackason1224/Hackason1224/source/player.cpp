@@ -43,7 +43,7 @@ HRESULT InitPlayer(int type)
 			&g_pD3DTexturePlayer);			// 読み込むメモリのポインタ
 	}
 
-		player.pos = D3DXVECTOR3(320.0f, 240.0f, 0.0f);	// 座標データを初期化
+		player.pos = D3DXVECTOR3(220.0f, 700.0f, 0.0f);	// 座標データを初期化
 		player.move = D3DXVECTOR3(5.0f, 5.0f, 0.0f);	// 座標データを初期化
 		player.PatternAnim = 1;							// アニメパターン番号をランダムで初期化
 		player.CountAnim = 0;							// アニメカウントを初期化

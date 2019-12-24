@@ -1,9 +1,14 @@
 #include "SceneResult.h"
 #include "../input.h"
 #include "../Result/ResultLogo.h"
+#include "../CircleSceneChanger.h"
 
 void SceneManager::SceneResult::OnStart(SceneManager & entity)
 {
+
+	//*********************************************************
+	// シーンチェンジの終了
+	CircleSceneChanger::Instance()->SetChanger(false);
 }
 
 SceneManager::State SceneManager::SceneResult::OnUpdate(SceneManager & entity)
@@ -13,7 +18,10 @@ SceneManager::State SceneManager::SceneResult::OnUpdate(SceneManager & entity)
 	// とりあえずスペースキー押したらタイトルへ
 	if (GetKeyboardTrigger(DIK_SPACE))
 	{
-		entity.ChangeState(State::Title);
+		CircleSceneChanger::Instance()->SetChanger(true, [&]()
+		{
+			entity.ChangeState(State::Title);
+		});
 	}
 
 	return State::Result;
