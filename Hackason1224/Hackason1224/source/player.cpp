@@ -88,13 +88,13 @@ void UpdatePlayer(void)
 
 	if (GetKeyboardPress(DIK_DOWN) || GetKeyboardPress(DIK_S)/*|| IsButtonPressed(0, BUTTON_DOWN)*/)
 	{
-		player.CountAnim++;
-		player.pos.y += player.move.x;
+		player.key = false;
+		//player.CountAnim++;
 	}
 	if (GetKeyboardPress(DIK_UP) || GetKeyboardPress(DIK_W) /*|| IsButtonPressed(0, BUTTON_UP)*/)
 	{
-		player.CountAnim++;
-		player.pos.y -= player.move.y;
+		player.key = true;
+		//player.CountAnim++;
 	}
 
 	//アニメーション
@@ -111,14 +111,16 @@ void UpdatePlayer(void)
 		}
 	}
 
-	// 弾発射
-	if (GetKeyboardTrigger(DIK_SPACE))
+	// 矢印設定
+	if (GetKeyboardTrigger(DIK_P))
 	{
+		bool key;
+		key = player.key;
 		D3DXVECTOR3 pos = player.pos;
-		pos.y += PLAYER_TEXTURE_SIZE_Y;
+		pos.y += PLAYER_TEXTURE_SIZE_X;
 		player.anim = true;
 		
-		SetYajirushi(pos);
+		SetYajirushi(pos,key);
 		player.cnt = 0;
 	}
 
