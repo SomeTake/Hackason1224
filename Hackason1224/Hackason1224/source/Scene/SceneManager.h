@@ -10,6 +10,8 @@
 #include <vector>
 #include "../../Main.h"
 
+class TitleLogo;
+class ResultLogo;
 //****************************************************
 // クラス定義
 //****************************************************
@@ -46,5 +48,8 @@ private:
 	using SceneState = BaseState<SceneManager, State>;
 	std::vector<SceneState*> fsm;		// ステートマシン
 
+	// 各種インスタンス
+	TitleLogo* titleLogo;
+	ResultLogo* resultLogo;
 };
 #endif

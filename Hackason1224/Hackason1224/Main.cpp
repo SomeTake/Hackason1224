@@ -6,6 +6,7 @@
 //=============================================================================
 #include "Main.h"
 #include "source/Scene/SceneManager.h"
+#include "source/input.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -278,6 +279,8 @@ HRESULT Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	manager = new SceneManager();
 	manager->Init();
 
+	InitInput(hInstance, hWnd);
+
 	return S_OK;
 }
 
@@ -288,6 +291,8 @@ void Uninit(void)
 {
 	manager->Uninit();
 	SAFE_DELETE(manager);
+
+	UninitInput();
 
 	// デバイスの開放
 	SAFE_RELEASE(g_pD3DDevice);
@@ -301,6 +306,7 @@ void Uninit(void)
 //=============================================================================
 void Update(HWND hWnd)
 {
+	UpdateInput();
 	manager->Update();
 }
 
