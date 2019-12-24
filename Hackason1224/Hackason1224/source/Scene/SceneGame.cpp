@@ -6,9 +6,14 @@
 #include "../yajirushi.h"
 #include "../Game/BackGround.h"
 #include "../Game/Flag.h"
+#include "../CircleSceneChanger.h"
 
 void SceneManager::SceneGame::OnStart(SceneManager & entity)
 {
+
+	//*********************************************************
+	// シーンチェンジの終了
+	CircleSceneChanger::Instance()->SetChanger(false);
 }
 
 SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
@@ -16,7 +21,10 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 	// とりあえずスペースキー押したらリザルトへ
 	if (GetKeyboardTrigger(DIK_SPACE))
 	{
-		entity.ChangeState(State::Result);
+		CircleSceneChanger::Instance()->SetChanger(true, [&]()
+		{
+			entity.ChangeState(State::Result);
+		});
 	}
 
 	UpdateGauge();

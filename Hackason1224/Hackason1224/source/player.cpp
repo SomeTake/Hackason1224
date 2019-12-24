@@ -26,9 +26,7 @@ void SetVertexPlayer(void);
 //*****************************************************************************
 static LPDIRECT3DTEXTURE9		g_pD3DTexturePlayer = NULL;		// テクスチャへのポリゴン
 
-static PLAYER					player;			// プレイヤー構造体
-
-//static LPDIRECTSOUNDBUFFER8		g_pSE;							// SE用バッファ
+static PLAYER					player;							// プレイヤー構造体
 
 //=============================================================================
 // 初期化処理
@@ -47,21 +45,14 @@ HRESULT InitPlayer(int type)
 
 		player.pos = D3DXVECTOR3(220.0f, 700.0f, 0.0f);	// 座標データを初期化
 		player.move = D3DXVECTOR3(5.0f, 5.0f, 0.0f);	// 座標データを初期化
-		player.PatternAnim = 1;		// アニメパターン番号をランダムで初期化
-		player.CountAnim = 0;										// アニメカウントを初期化
+		player.PatternAnim = 1;							// アニメパターン番号をランダムで初期化
+		player.CountAnim = 0;							// アニメカウントを初期化
 		player.Texture = g_pD3DTexturePlayer;
-		player.key = 0;
 
-		player.cnt = 0;//カウント
-		player.b_type = 0;//カウント
-		player.muteki_cnt = 0;
+		MakeVertexPlayer();								// 頂点情報の作成
 
-		player.ofs = D3DXVECTOR3(0.0f, 0.0f, 0.0f);				// オフセット座標を初期化
-
-		MakeVertexPlayer();											// 頂点情報の作成
-
-							//テクスチャ座標を設定
-		SetTexturePlayer( player.PatternAnim);
+		//テクスチャ座標を設定
+		SetTexturePlayer(player.PatternAnim);
 
 
 	return S_OK;
@@ -84,37 +75,32 @@ void UninitPlayer(void)
 //=============================================================================
 void UpdatePlayer(void)
 {
-
-	player.anim = false;
-
-	player.key = 0;
-
-	if (GetKeyboardPress(DIK_DOWN) || GetKeyboardPress(DIK_S)/*|| IsButtonPressed(0, BUTTON_DOWN)*/)
+	if (GetKeyboardPress(DIK_DOWN) || GetKeyboardPress(DIK_S))
 	{
 		player.key = 2;
 		player.anim = true;
 
 		player.cnt = 0;
 
-		//player.CountAnim++;
 	}
-	else if (GetKeyboardPress(DIK_UP) || GetKeyboardPress(DIK_W) /*|| IsButtonPressed(0, BUTTON_UP)*/)
+	else if (GetKeyboardPress(DIK_UP) || GetKeyboardPress(DIK_W))
 	{
 		player.key = 1;
 		player.anim = true;
 
 		player.cnt = 0;
 
-		//player.CountAnim++;
 	}
-	//key = player.key;
-
-	//SetYajirushi(pos, key);
-
 
 	//アニメーション
 	if (player.anim==true)
 	{
+		player.CountAnim++;
+
+		if (player.PatternAnim == PLAYER_TEXTURE_PATTERN_DIVIDE_X -1)
+		{
+			return;
+		}
 
 		if ((player.CountAnim % PLAYER_TIME_ANIMATION) == 0)
 		{
@@ -126,10 +112,11 @@ void UpdatePlayer(void)
 		}
 	}
 
-	// 矢印設定
-	//if (GetKeyboardTrigger(DIK_P))
-	//{
-	//}
+	 // 矢印設定
+	if (GetKeyboardTrigger(DIK_RETURN))
+	{
+		player.anim = true;
+	}
 
 
 	SetVertexPlayer();	// 移動後の座標で頂点を設定
@@ -199,6 +186,10 @@ void SetTexturePlayer( int cntPattern )
 	float ul = cntPattern * tw;
 	float ur = (cntPattern + PLAYER_TEXTURE_PATTERN_DIVIDE_Y) *tw;
 
+	player.vertexWk[0].tex = D3DXVECTOR2(ul, 0.0f);
+	player.vertexWk[1].tex = D3DXVECTOR2(ur, 0.0f);
+	player.vertexWk[2].tex = D3DXVECTOR2(ul, 1.0f);
+	player.vertexWk[3].tex = D3DXVECTOR2(ur, 1.0f);
 }
 
 //=============================================================================
