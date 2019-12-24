@@ -2,6 +2,7 @@
 #include "../input.h"
 #include "../player.h"
 #include "../yajirushi.h"
+#include "../Game/BackGround.h"
 
 void SceneManager::SceneGame::OnStart(SceneManager & entity)
 {
@@ -20,6 +21,9 @@ SceneManager::State SceneManager::SceneGame::OnUpdate(SceneManager & entity)
 	//–îˆó‚ÌXVˆ—
 	UpdateYajirushi();
 
+	// ”wŒi
+	entity.backGround->Update();
+
 	return State::Game;
 }
 
@@ -31,4 +35,7 @@ void SceneManager::SceneGame::OnDraw(SceneManager & entity)
 	//–îˆó‚Ì•`‰æˆ—
 	DrawYajirushi();
 
+
+	// ”wŒi‚Ì•`‰æ
+	entity.backGround->Draw();
 }

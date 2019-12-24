@@ -13,6 +13,7 @@
 #include "../Resource/ResourceManager.h"
 #include "../player.h"
 #include "../yajirushi.h"
+#include "../Game/BackGround.h"
 
 //=============================================================================
 // コンストラクタ
@@ -43,11 +44,11 @@ SceneManager::~SceneManager()
 void SceneManager::Init()
 {
 	// リソース読み込み
-	ResourceManager::Instance()->LoadTexture("TitleLogo", "data/Texture/Title.png");
-	ResourceManager::Instance()->LoadTexture("ResultLogo", "data/Texture/Result.png");
+	LoadResource();
 
 	titleLogo = new TitleLogo();
 	resultLogo = new ResultLogo();
+	backGround = new BackGround();
 
 	//プレイヤーの初期化
 	InitPlayer(0);
@@ -63,6 +64,7 @@ void SceneManager::Uninit()
 {
 	SAFE_DELETE(titleLogo);
 	SAFE_DELETE(resultLogo);
+	SAFE_DELETE(backGround);
 
 	//プレイヤーの終了処理
 	UninitPlayer();
@@ -93,4 +95,11 @@ void SceneManager::ChangeState(State next)
 	{
 		fsm[currentState]->OnStart(*this);
 	}
+}
+
+void SceneManager::LoadResource()
+{
+	ResourceManager::Instance()->LoadTexture("TitleLogo", "data/Texture/Title.png");
+	ResourceManager::Instance()->LoadTexture("ResultLogo", "data/Texture/Result.png");
+	ResourceManager::Instance()->LoadTexture("BackGround", "data/Texture/BackGround.png");
 }
