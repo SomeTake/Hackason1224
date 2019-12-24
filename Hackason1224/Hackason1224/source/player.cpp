@@ -48,7 +48,7 @@ HRESULT InitPlayer(int type)
 		player.PatternAnim = 1;							// アニメパターン番号をランダムで初期化
 		player.CountAnim = 0;							// アニメカウントを初期化
 		player.Texture = g_pD3DTexturePlayer;
-
+		player.anim = false;
 		MakeVertexPlayer();								// 頂点情報の作成
 
 		//テクスチャ座標を設定

@@ -32,6 +32,8 @@ bool enter = false;
 bool use = false;
 float gravity = 0.0f;
 D3DXVECTOR3 old;
+static int cnt = 1;
+
 //=============================================================================
 // 初期化処理
 //=============================================================================
@@ -47,6 +49,10 @@ HRESULT InitStation(int type)
 			&g_pD3DTextureStation);							// 読み込むメモリのポインタ
 	}
 
+	enter = false;
+	use = false;
+	gravity = 0.0f;
+	cnt = 1;
 
 	// バレットの初期化処理
 	station.pos = D3DXVECTOR3(300.0f, 900.0f, 0.0f);		// 座標データを初期化
@@ -92,7 +98,6 @@ void UpdateStation(void)
 	}
 	static D3DXVECTOR3 destination = D3DXVECTOR3(0.0f,0.0f,0.0f);
 	static float distance;
-	static int cnt=1;
 
 	if (enter == true)
 	{

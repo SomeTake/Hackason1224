@@ -141,7 +141,9 @@ void SceneManager::LoadResource()
 // ƒS[ƒ‹‚ÆŒ»İ‚Ì‰w‚ª‚ ‚éêŠ‚ğ‘ª‚é
 void SceneManager::CheckDistance()
 {
-	D3DXVECTOR3 vec = GameConfig::Const::StartPosition - GameConfig::Const::GoalPosition; // ÀÛ‚É‚Í—‰º‚µ‚½ˆÊ’u‚Æ”äŠr‚·‚é
+	STATION* station = GetStation();
+
+	D3DXVECTOR3 vec = station->pos - GameConfig::Const::GoalPosition; // ÀÛ‚É‚Í—‰º‚µ‚½ˆÊ’u‚Æ”äŠr‚·‚é
 	ResultDistance = D3DXVec3Length(&vec);
 	ResultDistance = abs(ResultDistance);
 }
