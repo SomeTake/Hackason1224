@@ -37,7 +37,7 @@ typedef struct	// プレイヤー構造体
 	D3DXVECTOR3		move;						// ポリゴンの座標
 	int				PatternAnim;				// アニメーションパターンナンバー
 	int				CountAnim;					// アニメーションカウント
-
+	bool            key;                        //true;上↑ false;下↓
 
 	LPDIRECT3DTEXTURE9	Texture;				// テクスチャ情報
 	VERTEX_2D		vertexWk[NUM_VERTEX];		// 頂点情報格納ワーク

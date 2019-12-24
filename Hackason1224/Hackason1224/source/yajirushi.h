@@ -30,6 +30,7 @@
 
 typedef struct	// バレット構造体
 {
+	bool            key;                        //true;上↑ false;下↓
 	bool			use;						// true:使用  false:未使用
 	D3DXVECTOR3		pos;						// ポリゴンの移動量
 	D3DXVECTOR3		rot;						// ポリゴンの回転量
@@ -52,7 +53,7 @@ HRESULT InitYajirushi(int type);
 void UninitYajirushi(void);
 void UpdateYajirushi(void);
 void DrawYajirushi(void);
-void SetYajirushi(D3DXVECTOR3 pos);
+void SetYajirushi(D3DXVECTOR3 pos,bool key);
 YAJIRUSHI *GetYajirushi(void);
 
 
